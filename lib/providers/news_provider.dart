@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:weather_news_app/constants.dart/constant_params.dart';
+import 'package:weather_news_app/providers/weather_provider.dart';
+
 class NewsProvider with ChangeNotifier {
   List<dynamic> _news = [];
   List<dynamic> _filteredNews = [];
@@ -10,6 +12,8 @@ class NewsProvider with ChangeNotifier {
 
   List<dynamic> get news => _filteredNews;
   bool get loading => _loading;
+
+  final WeatherProvider _weatherProvider = WeatherProvider();
 
   NewsProvider() {
     fetchNews({'All'});
@@ -47,7 +51,11 @@ class NewsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void filterNewsBasedOnWeather(String weatherCondition) {
+  void filterNewsBasedOnWeather() {
+    final weatherCondition = _weatherProvider.determineWeatherCondition(
+      _weatherProvider.weather?.temperature?.celsius,
+    );
+
     _loading = true;
     notifyListeners();
 
@@ -55,24 +63,24 @@ class NewsProvider with ChangeNotifier {
       case 'cold':
         _filteredNews = _news
             .where((article) =>
-                article['title'].toString().contains('depressing') ||
-                article['title'].toString().contains('sad') ||
-                article['title'].toString().contains('gloomy'))
+                article['title'].toString().contains('bounces') ||
+                article['title'].toString().contains('Overrated') ||
+                article['title'].toString().contains('turbine'))
             .toList();
         break;
       case 'hot':
         _filteredNews = _news
             .where((article) =>
-                article['title'].toString().contains('fear') ||
-                article['title'].toString().contains('scary'))
+                article['title'].toString().contains('Tech') ||
+                article['title'].toString().contains('hottest'))
             .toList();
         break;
       case 'cool':
         _filteredNews = _news
             .where((article) =>
-                article['title'].toString().contains('winning') ||
-                article['title'].toString().contains('happiness') ||
-                article['title'].toString().contains('joyful'))
+                article['title'].toString().contains('law') ||
+                article['title'].toString().contains('software') ||
+                article['title'].toString().contains('dollar'))
             .toList();
         break;
       default:

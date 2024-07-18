@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_news_app/constants.dart/constant_params.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:weather_news_app/providers/news_provider.dart';
 
 
 class WeatherProvider with ChangeNotifier {
@@ -18,7 +19,7 @@ class WeatherProvider with ChangeNotifier {
     try {
       _weather = await _weatherFactory.currentWeatherByLocation(position.latitude, position.longitude);
     } catch (e) {
-      print('Error fetching current weather: $e');
+      debugPrint('Error fetching current weather: $e');
     }
     notifyListeners();
   }
@@ -28,7 +29,7 @@ class WeatherProvider with ChangeNotifier {
     try {
       _forecast = await _weatherFactory.fiveDayForecastByLocation(position.latitude, position.longitude);
     } catch (e) {
-      print('Error fetching five day forecast: $e');
+      debugPrint('Error fetching five day forecast: $e');
     }
     notifyListeners();
   }
@@ -56,5 +57,17 @@ class WeatherProvider with ChangeNotifier {
     }
 
     return await Geolocator.getCurrentPosition();
+  }
+
+   String determineWeatherCondition(double? temperature) {
+    if (temperature == null) return 'no temperature';
+
+    if (temperature <= 10) {
+      return 'cold';
+    } else if (temperature > 30) {
+      return 'hot';
+    } else {
+      return 'cool';
+    }
   }
 }

@@ -34,7 +34,7 @@ class _NewsPageState extends State<NewsPage> {
         children: [
           Consumer<SettingsProvider>(
             builder: (context, settings, child) {
-              newsProvider.filterNews(settings.selectedNewsCategories);
+              newsProvider.filterNewsBasedOnWeather();
               return const SizedBox.shrink();
             },
           ),
