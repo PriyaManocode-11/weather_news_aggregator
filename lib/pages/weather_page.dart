@@ -20,8 +20,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<WeatherProvider>(context, listen: false)
-        ..fetchWeather("Chennai")
-        ..fetchFiveDayForecast("chennai");
+        ..fetchWeather()
+        ..fetchFiveDayForecast();
     });
     super.initState();
   }
