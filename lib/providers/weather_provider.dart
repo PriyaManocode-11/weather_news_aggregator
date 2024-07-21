@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_news_app/constants.dart/constant_params.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:weather_news_app/providers/news_provider.dart';
-
 
 class WeatherProvider with ChangeNotifier {
   final WeatherFactory _weatherFactory = WeatherFactory(ConstantParams.openWeatherApiKey);
