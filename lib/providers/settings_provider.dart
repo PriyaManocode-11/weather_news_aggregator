@@ -1,42 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:weather_news_app/constants.dart/strings.dart';
 
 class SettingsProvider with ChangeNotifier {
-  String _temperatureUnit = 'Celsius';
-  Set<String> _selectedNewsCategories = {
-    'All',
-    'Google News',
-    'CNBC',
-    'Benzinga',
-    'Fox Business',
-    'Bloomberg'
-  };
+  String _temperatureUnit = Strings.celsius;
+  String _selectedNewsCategory = Strings.business;
+  bool _filterNewsBasedOnWeather = false;
 
   String get temperatureUnit => _temperatureUnit;
-  Set<String> get selectedNewsCategories => _selectedNewsCategories;
+  String get selectedNewsCategory => _selectedNewsCategory;
+  bool get filterNewsBasedOnWeather => _filterNewsBasedOnWeather;
 
   void setTemperatureUnit(String unit) {
     _temperatureUnit = unit;
     notifyListeners();
   }
 
-  void toggleNewsCategory(String category) {
-    if (category == 'All') {
-      _selectedNewsCategories = {
-        'All',
-        'Google News',
-        'CNBC',
-        'Benzinga',
-        'Fox Business',
-        'Bloomberg'
-      };
-    } else {
-      _selectedNewsCategories.remove('All');
-      if (_selectedNewsCategories.contains(category)) {
-        _selectedNewsCategories.remove(category);
-      } else {
-        _selectedNewsCategories.add(category);
-      }
-    }
+  void setNewsCategory(String category) {
+    _selectedNewsCategory = category;
     notifyListeners();
   }
+
+  void toggleFilterNewsBasedOnWeather(bool value) {
+    _filterNewsBasedOnWeather = value;
+    notifyListeners();
+  }
+
 }

@@ -62,10 +62,8 @@ class WeatherProvider with ChangeNotifier {
 
     if (temperature <= 10) {
       return 'cold';
-    } else if (temperature > 30) {
-      return 'hot';
     } else {
-      return 'cool';
-    }
+      return 'hot';
+    } 
   }
 }

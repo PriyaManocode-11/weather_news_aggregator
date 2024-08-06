@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_news_app/constants.dart/styles.dart';
 import 'package:weather_news_app/pages/news_page.dart';
 import 'package:weather_news_app/pages/settings_page.dart';
+import 'package:weather_news_app/providers/news_provider.dart';
 import 'package:weather_news_app/providers/settings_provider.dart';
 import 'package:weather_news_app/providers/weather_provider.dart';
 
@@ -47,12 +49,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
           ),
         ],
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Weather Report',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 58, 102, 137),
+            color: const Color.fromARGB(255, 58, 102, 137),
           ),
         ),
       ),
@@ -71,9 +73,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(30),
+                            padding: EdgeInsets.all(30.sp),
                             child: Container(
-                              padding: const EdgeInsets.all(20),
+                              padding: EdgeInsets.all(20.sp),
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
                                   colors: [
@@ -84,7 +86,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   end: Alignment.bottomLeft,
                                   begin: Alignment.topRight,
                                 ),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10.sp),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +94,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   Row(
                                     children: [
                                       Container(
-                                        padding: const EdgeInsets.all(50),
+                                        padding: EdgeInsets.all(50.sp),
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: NetworkImage(
@@ -101,7 +103,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(width: 20),
+                                      SizedBox(width: 20.w),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -110,7 +112,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                             weather.areaName ?? '',
                                             style: textStyle(),
                                           ),
-                                          const SizedBox(height: 5),
+                                          SizedBox(height: 5.h),
                                           Text(
                                             (settingsProvider.temperatureUnit ==
                                                     'Celsius')
@@ -122,18 +124,18 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 10),
+                                  SizedBox(height: 10.h),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         weather.weatherDescription ?? '',
-                                        style: textStyle(fontSize: 15),
+                                        style: textStyle(fontSize: 15.sp),
                                       ),
                                       Text(
                                         DateFormat("EEEE").format(weatherNow),
-                                        style: textStyle(fontSize: 15),
+                                        style: textStyle(fontSize: 15.sp),
                                       ),
                                     ],
                                   ),
@@ -141,30 +143,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 30),
+                          SizedBox(height: 20.h),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30.w),
                             child: Text(
                               "Five Days Weather Forecast",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 58, 102, 137),
+                                color: const Color.fromARGB(255, 58, 102, 137),
                               ),
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 20.h),
                           SizedBox(
-                            height: constraints.maxHeight * 0.38,
+                            height: 0.3.sh,
                             child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: (forecast ?? []).length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  width: 200, // Adjust the width as needed
-                                  margin: const EdgeInsets.only(left: 30),
-                                  padding: const EdgeInsets.all(10),
+                                  width: 200.w,
+                                  margin: EdgeInsets.only(left: 30.w),
+                                  padding: EdgeInsets.all(20.sp),
                                   decoration: BoxDecoration(
                                     gradient: const LinearGradient(
                                       colors: [
@@ -187,7 +189,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                                 DateTime.now()),
                                         style: textStyle(),
                                       ),
-                                      const SizedBox(height: 10),
+                                      SizedBox(height: 10.h),
                                       Text(
                                         settingsProvider.temperatureUnit ==
                                                 'Celsius'
@@ -197,7 +199,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                         textAlign: TextAlign.center,
                                       ),
                                       Container(
-                                        padding: const EdgeInsets.all(40),
+                                        padding: EdgeInsets.all(40.sp),
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: NetworkImage(
@@ -211,12 +213,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                         DateFormat("h:mm a").format(
                                             forecast?[index].date ??
                                                 DateTime.now()),
-                                        style: textStyle(fontSize: 12),
+                                        style: textStyle(fontSize: 14.sp),
                                       ),
                                       Text(
                                         forecast?[index].weatherDescription ??
                                             '',
-                                        style: textStyle(fontSize: 12),
+                                        style: textStyle(fontSize: 14.sp),
                                       ),
                                     ],
                                   ),
@@ -224,16 +226,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: 50.h),
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => const NewsPage()));
+                              String temeperature = (weatherProvider
+                                              .weather?.temperature?.celsius ??
+                                          0) <=
+                                      10
+                                  ? 'cold'
+                                  : 'hot';
+                              Future.delayed(const Duration(seconds: 1)).then(
+                                (value) => Provider.of<NewsProvider>(context,
+                                        listen: false)
+                                    .fetchNews(
+                                        settingsProvider.selectedNewsCategory,
+                                        weatherCondition: temeperature,
+                                        filterBasedOnWeather: settingsProvider
+                                            .filterNewsBasedOnWeather),
+                              );
                             },
                             child: Container(
-                              padding: const EdgeInsets.all(10),
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 50),
+                              padding: EdgeInsets.all(10.sp),
+                              margin: EdgeInsets.symmetric(horizontal: 50.w),
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
                                   colors: [
@@ -244,12 +260,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   end: Alignment.bottomLeft,
                                   begin: Alignment.topRight,
                                 ),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10.sp),
                               ),
                               child: Center(
                                 child: Text(
                                   'Today\'s News',
-                                  style: textStyle(fontSize: 18),
+                                  style: textStyle(fontSize: 18.sp),
                                 ),
                               ),
                             ),
